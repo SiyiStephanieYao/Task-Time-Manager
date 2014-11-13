@@ -1,0 +1,765 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TimeTrackingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="fldClientId" />
+          </Key>
+          <Property Name="fldClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fldClientName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="fldEntryId" />
+          </Key>
+          <Property Name="fldEntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fldTaskId" Type="int" Nullable="false" />
+          <Property Name="fldClockIn" Type="datetime" Nullable="false" />
+          <Property Name="fldClockOut" Type="datetime" />
+          <Property Name="fldUserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fldHours" Type="float" />
+          <Property Name="fldEarning" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PayPeriod">
+          <Key>
+            <PropertyRef Name="fldPayPeriodId" />
+          </Key>
+          <Property Name="fldPayPeriodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fldPayPeriodName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="fldProjectId" />
+          </Key>
+          <Property Name="fldProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fldProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fldClientId" Type="int" Nullable="false" />
+          <Property Name="fldProjectDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="fldLocation" Type="nvarchar" MaxLength="500" />
+          <Property Name="fldManager" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fldIsClosed" Type="bit" Nullable="false" />
+          <Property Name="fldStartDate" Type="date" />
+          <Property Name="fldEndDate" Type="date" />
+          <Property Name="fldUserEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="fldScheduleId" />
+          </Key>
+          <Property Name="fldScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fldClockInYear" Type="int" Nullable="false" />
+          <Property Name="fldClockInMonth" Type="int" Nullable="false" />
+          <Property Name="fldClockInDay" Type="int" Nullable="false" />
+          <Property Name="fldClockInTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="fldUserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fldClockOutYear" Type="int" Nullable="false" />
+          <Property Name="fldClockOutMonth" Type="int" Nullable="false" />
+          <Property Name="fldClockOutDay" Type="int" Nullable="false" />
+          <Property Name="fldClockOutTime" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="fldTagId" />
+          </Key>
+          <Property Name="fldTagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fldTagName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TagFilter">
+          <Key>
+            <PropertyRef Name="fldFilterId" />
+            <PropertyRef Name="fldTagId" />
+          </Key>
+          <Property Name="fldFilterId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="fldTagId" Type="int" Nullable="false" />
+          <Property Name="fldFilterName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fldTagFilterType" Type="nchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="fldTaskId" />
+          </Key>
+          <Property Name="fldTaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fldTaskName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="fldTaskDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="fldTaskLocation" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="fldEstimagedHours" Type="float" />
+          <Property Name="fldHourlyRate" Type="float" />
+          <Property Name="fldPayPeriodId" Type="int" />
+          <Property Name="fldProjectId" Type="int" Nullable="false" />
+          <Property Name="fldStartDate" Type="date" />
+          <Property Name="fldEndDate" Type="date" />
+          <Property Name="fldIsDone" Type="bit" />
+          <Property Name="fldIsPaid" Type="bit" />
+          <Property Name="fldAutoClock" Type="bit" />
+        </EntityType>
+        <EntityType Name="TaskTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="fldTaskId" Type="int" Nullable="false" />
+          <Property Name="fldTagId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TTUser">
+          <Key>
+            <PropertyRef Name="fldUserEmail" />
+          </Key>
+          <Property Name="fldUserEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fldPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fldFirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="fldFamilyName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="fldDOB" Type="date" />
+          <Property Name="fldPosition" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="fldMobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fldphoto" Type="varchar(max)" />
+          <Property Name="fldIsActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Entry_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="fldTaskId" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="fldTaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_TTUser">
+          <End Role="TTUser" Type="Self.TTUser" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTUser">
+              <PropertyRef Name="fldUserEmail" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="fldUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_TTUser">
+          <End Role="TTUser" Type="Self.TTUser" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTUser">
+              <PropertyRef Name="fldUserEmail" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="fldUserEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_TTUser">
+          <End Role="TTUser" Type="Self.TTUser" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTUser">
+              <PropertyRef Name="fldUserEmail" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="fldUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagFilter_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="TagFilter" Type="Self.TagFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="fldTagId" />
+            </Principal>
+            <Dependent Role="TagFilter">
+              <PropertyRef Name="fldTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_PayPeriod">
+          <End Role="PayPeriod" Type="Self.PayPeriod" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayPeriod">
+              <PropertyRef Name="fldPayPeriodId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="fldPayPeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="fldProjectId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="fldProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="fldTagId" />
+            </Principal>
+            <Dependent Role="TaskTag">
+              <PropertyRef Name="fldTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskTag_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="fldTaskId" />
+            </Principal>
+            <Dependent Role="TaskTag">
+              <PropertyRef Name="fldTaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProject_tblClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="fldClientId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="fldClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimeTrackingModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entry" EntityType="Self.Entry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayPeriod" EntityType="Self.PayPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagFilter" EntityType="Self.TagFilter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskTag" EntityType="Self.TaskTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TTUser" EntityType="Self.TTUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Entry_Task" Association="Self.FK_Entry_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_TTUser" Association="Self.FK_Entry_TTUser">
+            <End Role="TTUser" EntitySet="TTUser" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_TTUser" Association="Self.FK_Project_TTUser">
+            <End Role="TTUser" EntitySet="TTUser" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_TTUser" Association="Self.FK_Schedule_TTUser">
+            <End Role="TTUser" EntitySet="TTUser" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagFilter_Tag" Association="Self.FK_TagFilter_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TagFilter" EntitySet="TagFilter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_PayPeriod" Association="Self.FK_Task_PayPeriod">
+            <End Role="PayPeriod" EntitySet="PayPeriod" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Project" Association="Self.FK_Task_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskTag_Tag" Association="Self.FK_TaskTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TaskTag" EntitySet="TaskTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskTag_Task" Association="Self.FK_TaskTag_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="TaskTag" EntitySet="TaskTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProject_tblClient" Association="Self.FK_tblProject_tblClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TimeTrackingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="fldClientId" />
+          </Key>
+          <Property Name="fldClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fldClientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="TimeTrackingModel.FK_tblProject_tblClient" FromRole="Client" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="PayPeriod">
+          <Key>
+            <PropertyRef Name="fldPayPeriodId" />
+          </Key>
+          <Property Name="fldPayPeriodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fldPayPeriodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="TimeTrackingModel.FK_Task_PayPeriod" FromRole="PayPeriod" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="fldTagId" />
+          </Key>
+          <Property Name="fldTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fldTagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TaskTags" Relationship="Self.FK_TaskTag_Tag" FromRole="Tag" ToRole="TaskTag" />
+          <NavigationProperty Name="TagFilters" Relationship="TimeTrackingModel.FK_TagFilter_Tag" FromRole="Tag" ToRole="TagFilter" />
+        </EntityType>
+        <EntityType Name="TaskTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="fldTaskId" Type="Int32" Nullable="false" />
+          <Property Name="fldTagId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_TaskTag_Tag" FromRole="TaskTag" ToRole="Tag" />
+          <NavigationProperty Name="Task" Relationship="TimeTrackingModel.FK_TaskTag_Task" FromRole="TaskTag" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="TTUser">
+          <Key>
+            <PropertyRef Name="fldUserEmail" />
+          </Key>
+          <Property Name="fldUserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fldPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fldFirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fldFamilyName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fldDOB" Type="DateTime" Precision="0" />
+          <Property Name="fldPosition" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fldMobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fldphoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fldIsActive" Type="Boolean" />
+          <NavigationProperty Name="Entries" Relationship="TimeTrackingModel.FK_Entry_TTUser" FromRole="TTUser" ToRole="Entry" />
+          <NavigationProperty Name="Schedules" Relationship="TimeTrackingModel.FK_Schedule_TTUser" FromRole="TTUser" ToRole="Schedule" />
+          <NavigationProperty Name="Projects" Relationship="TimeTrackingModel.FK_Project_TTUser" FromRole="TTUser" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_TaskTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="fldTagId" />
+            </Principal>
+            <Dependent Role="TaskTag">
+              <PropertyRef Name="fldTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimeTrackingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="PayPeriods" EntityType="Self.PayPeriod" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="TaskTags" EntityType="Self.TaskTag" />
+          <EntitySet Name="TTUsers" EntityType="Self.TTUser" />
+          <AssociationSet Name="FK_TaskTag_Tag" Association="Self.FK_TaskTag_Tag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="TaskTag" EntitySet="TaskTags" />
+          </AssociationSet>
+          <EntitySet Name="Projects" EntityType="TimeTrackingModel.Project" />
+          <AssociationSet Name="FK_tblProject_tblClient" Association="TimeTrackingModel.FK_tblProject_tblClient">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <EntitySet Name="TagFilters" EntityType="TimeTrackingModel.TagFilter" />
+          <AssociationSet Name="FK_TagFilter_Tag" Association="TimeTrackingModel.FK_TagFilter_Tag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="TagFilter" EntitySet="TagFilters" />
+          </AssociationSet>
+          <EntitySet Name="Entries" EntityType="TimeTrackingModel.Entry" />
+          <EntitySet Name="Schedules" EntityType="TimeTrackingModel.Schedule" />
+          <AssociationSet Name="FK_Entry_TTUser" Association="TimeTrackingModel.FK_Entry_TTUser">
+            <End Role="TTUser" EntitySet="TTUsers" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_TTUser" Association="TimeTrackingModel.FK_Schedule_TTUser">
+            <End Role="TTUser" EntitySet="TTUsers" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_TTUser" Association="TimeTrackingModel.FK_Project_TTUser">
+            <End Role="TTUser" EntitySet="TTUsers" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <EntitySet Name="Tasks" EntityType="TimeTrackingModel.Task" />
+          <AssociationSet Name="FK_Entry_Task" Association="TimeTrackingModel.FK_Entry_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_PayPeriod" Association="TimeTrackingModel.FK_Task_PayPeriod">
+            <End Role="PayPeriod" EntitySet="PayPeriods" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Project" Association="TimeTrackingModel.FK_Task_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskTag_Task" Association="TimeTrackingModel.FK_TaskTag_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskTag" EntitySet="TaskTags" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="fldProjectId" />
+          </Key>
+          <Property Name="fldProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fldProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fldClientId" Type="Int32" Nullable="false" />
+          <Property Name="fldProjectDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="fldLocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fldManager" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fldIsClosed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="TimeTrackingModel.FK_tblProject_tblClient" FromRole="Project" ToRole="Client" />
+          <Property Name="fldStartDate" Type="DateTime" Precision="0" />
+          <Property Name="fldEndDate" Type="DateTime" Precision="0" />
+          <Property Name="fldUserEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TTUser" Relationship="TimeTrackingModel.FK_Project_TTUser" FromRole="Project" ToRole="TTUser" />
+          <NavigationProperty Name="Tasks" Relationship="TimeTrackingModel.FK_Task_Project" FromRole="Project" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_tblProject_tblClient">
+          <End Type="TimeTrackingModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="TimeTrackingModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="fldClientId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="fldClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TagFilter">
+          <Key>
+            <PropertyRef Name="fldFilterId" />
+            <PropertyRef Name="fldTagId" />
+          </Key>
+          <Property Name="fldFilterId" Type="Guid" Nullable="false" />
+          <Property Name="fldTagId" Type="Int32" Nullable="false" />
+          <Property Name="fldFilterName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fldTagFilterType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tag" Relationship="TimeTrackingModel.FK_TagFilter_Tag" FromRole="TagFilter" ToRole="Tag" />
+        </EntityType>
+        <Association Name="FK_TagFilter_Tag">
+          <End Type="TimeTrackingModel.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="TimeTrackingModel.TagFilter" Role="TagFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="fldTagId" />
+            </Principal>
+            <Dependent Role="TagFilter">
+              <PropertyRef Name="fldTagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="fldEntryId" />
+          </Key>
+          <Property Name="fldEntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fldTaskId" Type="Int32" Nullable="false" />
+          <Property Name="fldClockIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fldClockOut" Type="DateTime" Precision="3" />
+          <Property Name="fldUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TTUser" Relationship="TimeTrackingModel.FK_Entry_TTUser" FromRole="Entry" ToRole="TTUser" />
+          <Property Name="fldHours" Type="Double" />
+          <Property Name="fldEarning" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Task" Relationship="TimeTrackingModel.FK_Entry_Task" FromRole="Entry" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="fldScheduleId" />
+          </Key>
+          <Property Name="fldScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fldClockInYear" Type="Int32" Nullable="false" />
+          <Property Name="fldClockInMonth" Type="Int32" Nullable="false" />
+          <Property Name="fldClockInDay" Type="Int32" Nullable="false" />
+          <Property Name="fldClockInTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="fldUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fldClockOutYear" Type="Int32" Nullable="false" />
+          <Property Name="fldClockOutMonth" Type="Int32" Nullable="false" />
+          <Property Name="fldClockOutDay" Type="Int32" Nullable="false" />
+          <Property Name="fldClockOutTime" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TTUser" Relationship="TimeTrackingModel.FK_Schedule_TTUser" FromRole="Schedule" ToRole="TTUser" />
+        </EntityType>
+        <Association Name="FK_Entry_TTUser">
+          <End Type="TimeTrackingModel.TTUser" Role="TTUser" Multiplicity="1" />
+          <End Type="TimeTrackingModel.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTUser">
+              <PropertyRef Name="fldUserEmail" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="fldUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_TTUser">
+          <End Type="TimeTrackingModel.TTUser" Role="TTUser" Multiplicity="1" />
+          <End Type="TimeTrackingModel.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTUser">
+              <PropertyRef Name="fldUserEmail" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="fldUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_TTUser">
+          <End Type="TimeTrackingModel.TTUser" Role="TTUser" Multiplicity="1" />
+          <End Type="TimeTrackingModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TTUser">
+              <PropertyRef Name="fldUserEmail" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="fldUserEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="fldTaskId" />
+          </Key>
+          <Property Name="fldTaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fldTaskName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fldTaskDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fldTaskLocation" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fldEstimagedHours" Type="Double" />
+          <Property Name="fldHourlyRate" Type="Double" />
+          <Property Name="fldPayPeriodId" Type="Int32" />
+          <Property Name="fldProjectId" Type="Int32" Nullable="false" />
+          <Property Name="fldStartDate" Type="DateTime" Precision="0" />
+          <Property Name="fldEndDate" Type="DateTime" Precision="0" />
+          <Property Name="fldIsDone" Type="Boolean" />
+          <Property Name="fldIsPaid" Type="Boolean" />
+          <Property Name="fldAutoClock" Type="Boolean" />
+          <NavigationProperty Name="Entries" Relationship="TimeTrackingModel.FK_Entry_Task" FromRole="Task" ToRole="Entry" />
+          <NavigationProperty Name="PayPeriod" Relationship="TimeTrackingModel.FK_Task_PayPeriod" FromRole="Task" ToRole="PayPeriod" />
+          <NavigationProperty Name="Project" Relationship="TimeTrackingModel.FK_Task_Project" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="TaskTags" Relationship="TimeTrackingModel.FK_TaskTag_Task" FromRole="Task" ToRole="TaskTag" />
+        </EntityType>
+        <Association Name="FK_Entry_Task">
+          <End Type="TimeTrackingModel.Task" Role="Task" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TimeTrackingModel.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="fldTaskId" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="fldTaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_PayPeriod">
+          <End Type="TimeTrackingModel.PayPeriod" Role="PayPeriod" Multiplicity="0..1" />
+          <End Type="TimeTrackingModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayPeriod">
+              <PropertyRef Name="fldPayPeriodId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="fldPayPeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Project">
+          <End Type="TimeTrackingModel.Project" Role="Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TimeTrackingModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="fldProjectId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="fldProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskTag_Task">
+          <End Type="TimeTrackingModel.Task" Role="Task" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TimeTrackingModel.TaskTag" Role="TaskTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="fldTaskId" />
+            </Principal>
+            <Dependent Role="TaskTag">
+              <PropertyRef Name="fldTaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TimeTrackingModelStoreContainer" CdmEntityContainer="TimeTrackingEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="TimeTrackingModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="fldClientId" ColumnName="fldClientId" />
+                <ScalarProperty Name="fldClientName" ColumnName="fldClientName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayPeriods">
+            <EntityTypeMapping TypeName="TimeTrackingModel.PayPeriod">
+              <MappingFragment StoreEntitySet="PayPeriod">
+                <ScalarProperty Name="fldPayPeriodId" ColumnName="fldPayPeriodId" />
+                <ScalarProperty Name="fldPayPeriodName" ColumnName="fldPayPeriodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="TimeTrackingModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="fldTagId" ColumnName="fldTagId" />
+                <ScalarProperty Name="fldTagName" ColumnName="fldTagName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskTags">
+            <EntityTypeMapping TypeName="TimeTrackingModel.TaskTag">
+              <MappingFragment StoreEntitySet="TaskTag">
+                <ScalarProperty Name="fldTaskId" ColumnName="fldTaskId" />
+                <ScalarProperty Name="fldTagId" ColumnName="fldTagId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TTUsers">
+            <EntityTypeMapping TypeName="TimeTrackingModel.TTUser">
+              <MappingFragment StoreEntitySet="TTUser">
+                <ScalarProperty Name="fldUserEmail" ColumnName="fldUserEmail" />
+                <ScalarProperty Name="fldPassword" ColumnName="fldPassword" />
+                <ScalarProperty Name="fldFirstName" ColumnName="fldFirstName" />
+                <ScalarProperty Name="fldFamilyName" ColumnName="fldFamilyName" />
+                <ScalarProperty Name="fldDOB" ColumnName="fldDOB" />
+                <ScalarProperty Name="fldPosition" ColumnName="fldPosition" />
+                <ScalarProperty Name="fldMobile" ColumnName="fldMobile" />
+                <ScalarProperty Name="fldphoto" ColumnName="fldphoto" />
+                <ScalarProperty Name="fldIsActive" ColumnName="fldIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="TimeTrackingModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="fldUserEmail" ColumnName="fldUserEmail" />
+                <ScalarProperty Name="fldEndDate" ColumnName="fldEndDate" />
+                <ScalarProperty Name="fldStartDate" ColumnName="fldStartDate" />
+                <ScalarProperty Name="fldIsClosed" ColumnName="fldIsClosed" />
+                <ScalarProperty Name="fldManager" ColumnName="fldManager" />
+                <ScalarProperty Name="fldLocation" ColumnName="fldLocation" />
+                <ScalarProperty Name="fldProjectDescription" ColumnName="fldProjectDescription" />
+                <ScalarProperty Name="fldClientId" ColumnName="fldClientId" />
+                <ScalarProperty Name="fldProjectName" ColumnName="fldProjectName" />
+                <ScalarProperty Name="fldProjectId" ColumnName="fldProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagFilters">
+            <EntityTypeMapping TypeName="TimeTrackingModel.TagFilter">
+              <MappingFragment StoreEntitySet="TagFilter">
+                <ScalarProperty Name="fldTagFilterType" ColumnName="fldTagFilterType" />
+                <ScalarProperty Name="fldFilterName" ColumnName="fldFilterName" />
+                <ScalarProperty Name="fldTagId" ColumnName="fldTagId" />
+                <ScalarProperty Name="fldFilterId" ColumnName="fldFilterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entries">
+            <EntityTypeMapping TypeName="TimeTrackingModel.Entry">
+              <MappingFragment StoreEntitySet="Entry">
+                <ScalarProperty Name="fldEarning" ColumnName="fldEarning" />
+                <ScalarProperty Name="fldHours" ColumnName="fldHours" />
+                <ScalarProperty Name="fldUserId" ColumnName="fldUserId" />
+                <ScalarProperty Name="fldClockOut" ColumnName="fldClockOut" />
+                <ScalarProperty Name="fldClockIn" ColumnName="fldClockIn" />
+                <ScalarProperty Name="fldTaskId" ColumnName="fldTaskId" />
+                <ScalarProperty Name="fldEntryId" ColumnName="fldEntryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="TimeTrackingModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="fldClockOutTime" ColumnName="fldClockOutTime" />
+                <ScalarProperty Name="fldClockOutDay" ColumnName="fldClockOutDay" />
+                <ScalarProperty Name="fldClockOutMonth" ColumnName="fldClockOutMonth" />
+                <ScalarProperty Name="fldClockOutYear" ColumnName="fldClockOutYear" />
+                <ScalarProperty Name="fldUserId" ColumnName="fldUserId" />
+                <ScalarProperty Name="fldClockInTime" ColumnName="fldClockInTime" />
+                <ScalarProperty Name="fldClockInDay" ColumnName="fldClockInDay" />
+                <ScalarProperty Name="fldClockInMonth" ColumnName="fldClockInMonth" />
+                <ScalarProperty Name="fldClockInYear" ColumnName="fldClockInYear" />
+                <ScalarProperty Name="fldScheduleId" ColumnName="fldScheduleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="TimeTrackingModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="fldAutoClock" ColumnName="fldAutoClock" />
+                <ScalarProperty Name="fldIsPaid" ColumnName="fldIsPaid" />
+                <ScalarProperty Name="fldIsDone" ColumnName="fldIsDone" />
+                <ScalarProperty Name="fldEndDate" ColumnName="fldEndDate" />
+                <ScalarProperty Name="fldStartDate" ColumnName="fldStartDate" />
+                <ScalarProperty Name="fldProjectId" ColumnName="fldProjectId" />
+                <ScalarProperty Name="fldPayPeriodId" ColumnName="fldPayPeriodId" />
+                <ScalarProperty Name="fldHourlyRate" ColumnName="fldHourlyRate" />
+                <ScalarProperty Name="fldEstimagedHours" ColumnName="fldEstimagedHours" />
+                <ScalarProperty Name="fldTaskLocation" ColumnName="fldTaskLocation" />
+                <ScalarProperty Name="fldTaskDescription" ColumnName="fldTaskDescription" />
+                <ScalarProperty Name="fldTaskName" ColumnName="fldTaskName" />
+                <ScalarProperty Name="fldTaskId" ColumnName="fldTaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

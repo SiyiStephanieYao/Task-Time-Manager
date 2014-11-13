@@ -1,0 +1,55 @@
+﻿<form name="expoertoemailForm" ng-controller="exporttoemailcontroller">
+    <ion-view title="Export to email" animation="slide-left-right">
+        <div class="bar bar-header bar-stable">
+            <div class="button-bar">
+                <button class="button button-small button-positive" ng-click="expoertoemailForm.$valid && FullExport(FormFields)">Done</button>
+                <button class="button button-small button-positive" ng-click="Cancel()">Cancel</button>               
+            </div>
+        </div>
+        <ion-content class="has-header padding">
+            <div class="list">
+                <div class="item item-divider">
+                    Export to Email
+                </div>
+                <br />
+                <span>
+                    <span>Email To</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="email" placeholder="Email" ng-model="FormFields.fldUserEmail" required>
+                    </label>
+                    <br />
+                    <span>Subject</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Subject" ng-model="FormFields.subject" required>
+                    </label>
+                    <br />
+                    <div>
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                                Body Format
+                            </div>
+                            <select>
+                                <option value="1">Friendly</option>
+                            </select>
+                        </label>
+                    </div>
+                    <br />
+                    <div>
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                                Attachment Format
+                            </div>
+                            <select>
+                                <option value="1">CSV</option>
+                            </select>
+                        </label>
+                    </div>
+                </span>
+                <br />
+                <button class="button button-small button-positive" ng-click="expoertoemailForm.$valid && MoreOptions(FormFields.fldUserEmail,FormFields.subject)">More Export Option</button>
+            </div>
+        </ion-content>
+    </ion-view>
+</form>
+
+

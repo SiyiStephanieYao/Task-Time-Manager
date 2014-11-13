@@ -1,0 +1,95 @@
+﻿<div>
+    <form name="addtaskForm" ng-controller="addtaskcontroller">
+        <ion-view title="Add Task" animation="slide-left-right">
+            <div>
+                <div class="bar bar-header bar-stable">
+                    <div class="button-bar">
+                        <button class="button button-small button-positive" ng-click="addtaskForm.$valid && AddTask()">Done</button>
+                        <button class="button button-small button-positive" ng-click="Cancel()">Cancel</button>                        
+                    </div>
+                </div>
+                <ion-content class="has-header padding">
+                    <div class="list">
+                        <div class="item item-divider">
+                            Add Task
+                        </div>
+                        <br />
+                        *<span>Task Name</span>
+                        <label class="item item-input item-stacked-label">
+                            <input type="text" placeholder="Task Name" ng-model="Task.fldTaskName" ng-readonly="Task.fldIsDone" required>
+                        </label>
+                        <br />
+                        <span>Description</span>
+                        <label class="item item-input item-stacked-label">
+                            <input type="text" placeholder="Description" ng-model="Task.fldTaskDescription" ng-readonly="Task.fldIsDone">
+                        </label>
+                        <br />
+                        <div class="form-group">
+                            <label class="control-label"><i class="fa fa-calendar"></i>* Start Date</label><br>
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="Task.fldStartDate" required ng-readonly="Task.fldIsDone" data-date-format="dd/MM/yyyy" data-autoclose="1" placeholder="dd/MM/yyyy" bs-datepicker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"><i class="fa fa-calendar"></i>End date</label><br>
+                            <div class="form-group">
+                                <input type="text" ng-model="Task.fldEndDate" ng-readonly="true" />
+                            </div>
+                        </div>
+                        <span>* Location</span>
+                        <label class="item item-input item-stacked-label">
+                            <input id="from" type="text" ng-model="Task.fldTaskLocation" placeholder="Type Address" class="ng-pristine ng-valid" autocomplete="on" ng-disabled="Task.fldIsDone" required>
+                            <!--<input type="hidden" ng-model="user.fromLat">-->
+                            <!--<input type="hidden" ng-model="user.fromLng">-->
+                            <!--<p>{{user.from}} <br> {{'Latitude : ' + user.fromLat + ', Longitutde : ' + user.fromLng}}</p>-->
+                        </label>
+                        <br />
+                        <div class="list">
+                            <div class="item item-divider">
+                                <button class="button button-small button-positive" ng-click="AddTags()" ng-disabled="Task.fldIsDone">Add Tags</button>
+                            </div>
+                            <div ng-repeat="tasktag in Task.TaskTags">
+                                <a class="item">
+                                    {{tasktag.fldTagName}}
+                                </a>
+                            </div>
+                        </div>
+
+                        <br />
+                        <span>Estimated Time</span>
+                        <label class="item item-input item-stacked-label">
+                            <input type="number" min="0" max="1000" placeholder="Hours" ng-model="Task.fldEstimagedHours" ng-readonly="Task.fldIsDone">
+                        </label>
+                        <br />
+                        *
+                        <span>Hourly Rate</span>
+                        <label class="item item-input item-stacked-label">
+                            <input type="number" min="0" max="1000" placeholder="Hourly Rate" ng-model="Task.fldHourlyRate" ng-readonly="Task.fldIsDone" required>
+                        </label>
+                        <br />
+                        <div>
+                            <label class="item item-input item-select">
+                                <div class="input-label">
+                                    Pay Period
+                                </div>
+                                <select ng-model="Task.fldPayPeriodId">
+                                    <option ng-repeat="payperiod in PayPeriod" value="{{payperiod.fldPayPeriodId}}" ng-disabled="Task.fldIsDone">{{payperiod.fldPayPeriodName}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">                               
+                                    <input class="ckbox" type="checkbox" title="IsDone" name="IsDone" value="IsDone" ng-model="Task.fldIsDone" ng-disabled="Task.fldIsDone" ng-click="WantToMakeClose()">  Done
+                                    <input class="ckbox" type="checkbox" title="IfPaid" name="IfPaid" value="IfPaid" ng-model="Task.fldIsPaid" ng-disabled="Task.fldIsDone"> If Paid
+                                   <!--<input type="checkbox" title="IfAutoClock" name="IfAutoClock" value="IfAutoClock" ng-model="Task.fldAutoClock" ng-disabled="Task.fldIsDone"> If clock in and out automatically-->
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </ion-content>
+            </div>
+        </ion-view>
+    </form>
+</div>
+

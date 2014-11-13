@@ -1,0 +1,15 @@
+{
+  "name": "curioussolutions-datetimepicker",
+  "homepage": "https://github.com/CuriousSolutions/DateTimePicker",
+  "version": "0.1.1",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.1",
+    "commit": "56aa510b5f5ff74696e07798639d76aced7e12b1"
+  },
+  "_source": "git://github.com/CuriousSolutions/DateTimePicker.git",
+  "_target": "~0.1.1",
+  "_originalSource": "curioussolutions-datetimepicker",
+  "_direct": true
+}

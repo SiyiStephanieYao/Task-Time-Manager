@@ -1,0 +1,46 @@
+﻿<div>
+    <form name="projectdetailsForm" ng-controller="projectdetailscontroller">
+        <ion-view title="Project Details">
+            <ion-header-bar align-title="left" class="bar-stable">
+                <div class="buttons">
+                </div>
+                <h1 class="title">{{Project.fldProjectName}}</h1>
+                <div class="buttons">
+                    <button class="button editicon" style="margin-left:5px;" ng-click="EditProject()"></button>
+                    <button class="button exporticon" style="margin-left:5px;" ng-click="ExportOptions()"></button>
+                </div>
+            </ion-header-bar>
+            <ion-content class="has-header padding">
+                <div class="item item-divider">
+                    Project details
+                </div>
+                <div class="list" ng-model="Project">
+                    <div class="card">
+                        <div class="item item-divider">
+                            Summary
+                        </div>
+                        <div class="item item-text-wrap">
+                            <p>From : {{Project.fldStartDate | date:'dd-MMM-yyyy'}}</p>
+                            <p>To : {{Project.fldEndDate | date:'dd-MMM-yyyy'}}</p>
+                            <p>Hours : {{Project.totalhours}}
+                            <p>Earnings ($) : {{Project.totalearning}}</p>
+                        </div>
+                        <div class="item item-divider">
+                            Details
+                        </div>
+                        <div class="item item-text-wrap">
+                            <p>Client: {{Project.clientname}}</p>
+                            <p>Description : {{Project.fldProjectDescription}}</p>
+                            <p>Location:  {{Project.fldLocation}} </p>
+                            <p>Manager: {{Project.fldManager}}</p>
+                            <p ng-if="Project.fldIsClosed==1">Status: Closed</p>
+                            <p ng-if="Project.fldIsClosed==0  || Project.fldIsClosed== null">Status: In Progress</p>
+
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </ion-content>
+        </ion-view>
+    </form>
+</div>

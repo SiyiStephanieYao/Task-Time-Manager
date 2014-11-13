@@ -1,0 +1,29 @@
+﻿<form name="timeperiodForm" ng-controller="timeperiodfiltercontroller">
+    <ion-view title="Time Period" animation="slide-left-right">
+        <div class="bar bar-header bar-stable">
+            <div class="button-bar">
+                <button class="button button-small button-positive" ng-click="Cancel()">Cancel</button>
+            </div>
+        </div>
+        <div>
+            <ion-content class="has-header padding">
+                <div class="list">
+                    <div class="item item-divider">
+                        Time Period
+                    </div>
+                    <br />
+                    <div class="list">
+                        <a class="item" ng-click="SelectedTimePeriod('Today')">Today</a>
+                        <a class="item" ng-click="SelectedTimePeriod('This_Week')">This Week</a>
+                        <a class="item" ng-click="SelectedTimePeriod('This_Month')">This Month</a>
+                        <a class="item" ng-click="SelectedTimePeriod('Yesterday')">Yesterday</a>
+                        <a class="item" ng-click="SelectedTimePeriod('Last_Week')">Last week</a>
+                        <a class="item" ng-click="SelectedTimePeriod('Last_Month')">Last Month</a>
+                        <a class="item" ng-click="SelectedTimePeriod('ALL')">ALL</a>
+                    </div>
+                    <br />
+                </div>
+            </ion-content>
+        </div>
+    </ion-view>
+</form>

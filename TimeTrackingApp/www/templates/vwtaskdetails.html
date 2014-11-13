@@ -1,0 +1,67 @@
+﻿<ion-view title="Task Details">
+    <form name="taskdetailsForm" ng-controller="taskdetailscontroller">
+        <ion-header-bar align-title="left" class="bar-stable">
+            <div class="buttons">
+
+            </div>
+            <h1 class="title">{{Task.fldTaskName}}</h1>
+            <div class="buttons">
+                <button class="button editicon" ng-click="EditTask()" style="margin-left:5px;" ng-show="true"></button>
+                <button class="button exporticon" style="margin-left:5px;" ng-click="ExportOptions()"></button>
+            </div>
+        </ion-header-bar>
+        <div class="bar bar-subheader" style="position:absolute;">
+            <div class="button-bar">
+                <a class="button button-positive" ng-click="Clock()" ng-hide="IsProjectClosed">{{checkouttext}}</a>
+                <a class="button button-positive" ng-click="AutoClock()" ng-hide="IsProjectClosed">{{autocheckouttext}}</a>
+            </div>
+        </div>
+        <ion-content class="has-header padding">
+            <div class="item item-divider">
+            </div>
+            <div class="list" ng-model="Task">
+                <div class="card">
+                    <div class="item item-divider">
+                        Task Details - Summary
+                    </div>
+                    <div class="item item-text-wrap">
+                        <p>From : {{Task.fldStartDate | date:'dd-MMM-yyyy'}}</p>
+                        <p>To : {{Task.fldEndDate | date:'dd-MMM-yyyy'}}</p>
+                        <p>Hourly Rate : {{Task.fldHourlyRate}}</p>
+                        <p>Hours : {{Task.totalhours}}
+                        <p>Earnings ($) : {{Task.totalearning}}</p>
+                    </div>
+                </div>
+                <div class="item item-divider">
+                    Details
+                </div>
+                <div class="item item-text-wrap">
+                    <p>Location:  {{Task.fldTaskLocation}} </p>
+                    <p>Description : {{Task.fldTaskDescription}}</p>
+                    <p>Is Done: {{Task.fldIsDone}}</p>
+                    <p>
+                        Tags:
+                        <div ng-repeat="tag in Task.TaskTags">
+                            {{tag.fldTagName}}
+                        </div>
+                    </p>
+                    <p>Estimated Time: {{Task.fldEstimagedHours}} </p>
+                    <p ng-if="Task.fldPayPeriodId==1">
+                        Pay Period: Daily
+                    </p>
+                    <p ng-if="Task.fldPayPeriodId==2">
+                        Pay Period: Weekly
+                    </p>
+                    <p ng-if="Task.fldPayPeriodId == 3">
+                        Pay Period: Monthly
+                    </p>
+                    <p ng-if="Task.fldIsDone==1">Status: Closed</p>
+                    <p ng-if="Task.fldIsDone==0  || Task.fldIsDone== null">Status: In Progress</p>
+                    <p ng-if="Task.fldIsPaid==1">If Paid: Yes</p>
+                    <p ng-if="Task.fldIsPaid==0  || Task.fldIsPaid== null">If Paid: No</p>
+                    <br />
+                </div>
+            </div>
+        </ion-content>
+    </form>
+</ion-view>

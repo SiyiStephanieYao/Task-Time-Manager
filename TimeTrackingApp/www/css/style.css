@@ -1,0 +1,160 @@
+/* Empty. Add your own CSS if you like */
+input.has-visited.ng-invalid:not(.has-focus) {
+    background-color: lightgray;
+}
+
+select.has-visited.ng-invalid:not(.has-focus) {
+    background-color: lightgray;
+}
+
+
+.addicon {
+    background-image: url('../img/icons/plus-circled.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+}
+
+.payperiodicon {
+    background-image: url('../img/icons/grid.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.deleteicon {
+    background-image: url('../img/icons/trash-a.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.editicon {
+    background-image: url('../img/icons/edit.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.exporticon {
+    background-image: url('../img/icons/social-buffer.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.footer {
+    height: 10px;
+}
+
+#comment {
+    font-style: italic;
+    font-size: 12px;
+}
+
+
+/*CSS FOR MAP - Start*/
+.mapcontrols {
+    margin-top: 16px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+    background-color: #fff;
+    padding: 0 11px 0 13px;
+    width: 400px;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    text-overflow: ellipsis;
+}
+
+    #pac-input:focus {
+        border-color: #4d90fe;
+        margin-left: -1px;
+        padding-left: 14px; /* Regular padding-left + 1. */
+        width: 401px;
+    }
+
+.pac-container {
+    font-family: Roboto;
+}
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+    #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+#map_canvas {
+    margin: 0;
+    padding: 0;
+    height: 400px;
+    border: 1px solid #ccc;
+}
+
+/*CSS FOR MAP - End*/
+
+.screen-background {
+    /*background-image: url('../img/background.png');
+    background-color:gray*/
+}
+
+.datepicker.dropdown-menu {
+  width: 250px;
+  height: 250px;
+}
+.datepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.datepicker.dropdown-menu tbody {
+  height: 180px;
+}
+.datepicker.dropdown-menu tbody button {
+  padding: 6px;
+}
+.datepicker.dropdown-menu.datepicker-mode-1 tbody button,
+.datepicker.dropdown-menu.datepicker-mode-2 tbody button {
+  height: 65px;
+}
+.timepicker.dropdown-menu {
+  padding: 0 4px;
+}
+.timepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.timepicker.dropdown-menu tbody button {
+  padding: 6px;
+}
+
+
+/*Center table style*/
+.centertable{
+border: 1px solid gray; 
+margin-left: auto; 
+margin-right: auto; 
+width: 100%; 
+font-size: 12px;}

@@ -1,0 +1,146 @@
+﻿<form name="moreExportForm" ng-controller="moreexportoptionscontroller">
+    <ion-view title="More Export Option" animation="slide-left-right">
+        <div class="bar bar-header bar-stable">
+            <div class="button-bar">
+                <button class="button button-small button-positive" ng-click="MoreExport(FormFields)">Done</button>
+                <button class="button button-small button-positive" ng-click="Cancel()">Cancel</button>
+            </div>
+        </div>
+        <ion-content class="has-header padding">
+            <div class="list">
+                <div class="item item-divider">
+                    More Export Option
+                </div>
+                <br />
+                <div id="comment">If you don’t select any field, the default will select all the fields to export.</div>
+                <div class="card">
+                    <div class="item item-divider">
+                        Project
+                    </div>
+                    <div class="item item-text-wrap">
+                        <div class="row">
+                            <div class="col-50">
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectNameChecked" />
+                                    Name
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectClientChecked" />
+                                    Client
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectLocationChecked" />
+                                    Location
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectDescriptionChecked" />
+                                    Description
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectStatusChecked" />
+                                    Status
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectStartTimeChecked" />
+                                    Start Time
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectEndTimeChecked" />
+                                    End Time
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectDurationChecked" />
+                                    Duration
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.ProjectEarningsChecked" />
+                                    Earnings
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-divider">
+                        Task
+                    </div>
+                    <div class="item item-text-wrap">
+                        <div class="row">
+                            <div class="col-50">
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskNameChecked" />
+                                    Name
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskEstimatedTimeChecked" />
+                                    Estimated Time
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskLocationChecked" />
+                                    Location
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskDescriptionChecked" />
+                                    Description
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskStatusChecked" />
+                                    Status
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskPayPeriodChecked" />
+                                    Pay Period
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskTagsChecked" />
+                                    Tags
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskStartTimeChecked" />
+                                    Start Time
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskEndTimeChecked" />
+                                    End Time
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskDurationChecked" />
+                                    Duration
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskHourlyRateChecked" />
+                                    Hourly Rate
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskEarningsChecked" />
+                                    Earnings
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="ckbox" ng-model="FormFields.TaskIsPaidChecked" />
+                                    If Paid
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-divider">
+                        Entry
+                    </div>
+                    <div class="item item-text-wrap">
+                        <div class="row">
+                            <div class="col-50">
+                                <div>
+                                    <input type="checkbox" class="ckbox" class="ckbox" ng-model="FormFields.EntryNameChecked" />
+                                    Entry
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-view>
+</form>
+
+

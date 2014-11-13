@@ -1,0 +1,32 @@
+<form name="loginForm" ng-controller="logincontroller">
+    <ion-view title="Login" class="screen-background">
+        <div class="bar bar-header bar-stable">
+            <div class="button-bar">
+                <button class="button button-positive" ng-click="loginForm.$valid && login(credentials)">Log In</button>
+                <button class="button button-positive" ng-click="RegisterUser()">Register</button>
+            </div>
+        </div>
+        <ion-content class="has-header padding">
+            <div class="list">
+                <div class="item item-divider">
+                    Login
+                </div>
+                <div style="margin-top:8%;">
+                    <span>Account Name</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="email" placeholder="Email" ng-model="credentials.fldUserEmail" required>
+                    </label>
+                    <br />
+                    <span>Password</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="password" placeholder="Password" ng-model="credentials.fldPassword" required>
+                    </label>
+                    <br />
+                        <ion-checkbox ng-model="credentials.rememberme">Remember Me</ion-checkbox>
+                    <br />
+                    <button type="button" class="button button-block button-positive" ng-click="ForgetPassword()">Forgot Password</button>
+                 </div>               
+            </div>
+        </ion-content>
+    </ion-view>
+</form>

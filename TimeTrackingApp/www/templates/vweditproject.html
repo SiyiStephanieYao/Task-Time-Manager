@@ -1,0 +1,76 @@
+﻿<form name="editProjectForm" ng-controller="updateaccountcontroller">
+    <ion-view title="Edit Project" animation="slide-left-right">
+        <div ng-controller="editprojectcontroller">
+            <div class="bar bar-header bar-stable">
+                <div class="button-bar">                   
+                    <button class="button button-positive" ng-click="editProjectForm.$valid && UpdateProject()" ng-hide="HideDoneButton">Done</button>
+                    <button class="button button-positive" ng-click="Cancel()">Cancel</button>
+                </div>
+            </div>
+            <ion-content class="has-header padding">
+                <div class="list">
+                    <div class="item item-divider">
+                        Edit Project
+                    </div>
+                    <br />
+                    <span>* Project Name</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Project Name" ng-model="Project.fldProjectName" required>
+                    </label>
+                    <br />
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            * Client
+                        </div>
+                        <select data-ng-model="Project.fldClientId"
+                                data-ng-options="client.fldClientId as client.fldClientName for client in Clients"></select>
+                    </label>
+                    <br />
+                    <span>Description</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Description" ng-model="Project.fldProjectDescription">
+                    </label>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label"><i class="fa fa-calendar"></i>* Start Date</label><br>
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="Project.fldStartDate" required data-date-format="dd/MM/yyyy" data-autoclose="1" placeholder="dd/MM/yyyy" bs-datepicker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"><i class="fa fa-calendar"></i>End date</label><br>
+                        <div class="form-group">
+                            <input type="text" ng-model="Project.fldEndDate" ng-disabled="true" />
+                        </div>
+                    </div>
+
+                    <span>* Location</span>
+                    <label class="item item-input item-stacked-label">
+                        <input id="from" type="text" ng-model="Project.fldLocation" placeholder="Type Address" class="ng-pristine ng-valid" autocomplete="on" required>
+                        <!--<input type="hidden" ng-model="user.fromLat">-->
+                        <!--<input type="hidden" ng-model="user.fromLng">-->
+                        <!--<p>{{user.from}} <br> {{'Latitude : ' + user.fromLat + ', Longitutde : ' + user.fromLng}}</p>-->
+                    </label>
+                    <br />
+                    <div>
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                               * Manager
+                            </div>
+                            <select data-ng-model="Project.fldManager"
+                                    data-ng-options="manager.fldUserEmail as manager.fldFirstName for manager in Managers"></select>
+
+                        </label>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col">                            
+                            <input class="ckbox" type="checkbox" title="Is closed" name="IsClosed" value="IsClosed" ng-model="Project.fldIsClosed" ng-click="WantToMakeClose()" ng-disabled="Project.fldIsClosed">  Is Closed                        
+                        
+                        </div>
+                    </div>
+                </div>
+            </ion-content>
+        </div>
+    </ion-view>
+</form>

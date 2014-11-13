@@ -1,0 +1,60 @@
+﻿<ion-view title="Entry Details" animation="slide-left-right">
+    <form name="entryhomeForm" ng-controller="entryhomecontroller">
+        <ion-header-bar align-title="left" class="bar-stable">
+            <h1 class="title"></h1>
+            <div class="buttons">
+                <button class="button payperiodicon" style="margin-left:5px;" ng-click="PeriodFilter()" ng-show="ShowFilterButton"></button>
+                <button class="button exporticon" style="margin-left: 5px;" ng-click="ExportDatabyTasks()" ng-show="ShowExportButton"></button>
+                <button class="button deleteicon" ng-click="DeleteEntries()" style="margin-left: 5px;" ng-show="ShowDeleteButton"></button>
+            </div>
+        </ion-header-bar>
+        <ion-content class="has-header padding">
+            <div class="item item-divider">
+                Entries
+            </div>
+            <div style="clear:both;"></div>
+            <br />
+            <div class="item item-divider">
+                <span style="font-weight:lighter;">{{NoOfEntriesSelected}}</span>
+            </div>
+            <div class="list">
+                <div class="card">
+                    <div class="item item-divider">
+                        Time Period
+                    </div>
+                    <div class="item item-text-wrap" ng-model="Entries">
+                        <div class="row centertable">
+                            <div class="col col-10">
+
+                            </div>
+                            <div class="col col-50"> <b>Clock In </b></div>
+                            <div class="col col-20"><b>Hrs</b></div>
+                            <div class="col col-20"><b>$</b></div>
+                        </div>
+                        <div ng-repeat="entry in Entries.EntryViewModelList" >
+                            <div class="row centertable">
+                                <div class="col col-10">
+                                    <input class="ckbox" type="checkbox" ng-model="entry.checked" ng-checked="entry.checked" ng-change="EntryCheckBoxSelectionChanged()" />
+                                </div>
+                                <div class="col col-50">{{entry.fldClockIn | date : 'dd/MM/yyyy'}}</div>
+                                <div class="col col-20">{{entry.fldHours}}</div>
+                                <div class="col col-20">{{entry.fldEarning}}</div>
+                                <div class="col" style="visibility:hidden;">{{entry.fldEntryId}}</div>
+                            </div>
+                        </div>
+                        <div class="row centertable">
+                            <div class="col col-10">
+                            </div>
+                            <div class="col col-50"> Total </div>
+                            <div class="col col-20">{{Entries.TotalHours}}</div>
+                            <div class="col col-20">{{Entries.TotalEarning}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </form>
+</ion-view>
+
+
+

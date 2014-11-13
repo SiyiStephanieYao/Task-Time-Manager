@@ -1,0 +1,42 @@
+﻿<ion-view title="Tag Details">
+    <form name="tagsForm" ng-controller="filtertagscontroller">
+        <div class="bar bar-header bar-stable">
+            <div class="button-bar">
+                <button class="button button-small button-positive" ng-click="AssignTagsToFilter()">Done</button>
+                <button class="button button-small button-positive" ng-click="Cancel()">Cancel</button>                
+            </div>
+        </div>
+        <ion-content class="has-header padding">
+            <div class="list" ng-model="Tags">
+                <div>
+                    <div class="card">
+                        <div class="item item-divider">
+                            Add Tag
+                        </div>
+                        <div class="item item-text-wrap">
+                            <div class="row">
+                                <div class="col-80">
+                                    <label class="item item-input item-stacked-label">
+                                        <input type="text" name="name" placeholder="Add Tag" ng-model="Tags.fldTagName" required />
+                                    </label>
+                                </div>
+                                <div class="col-20">
+                                    <button class="button addicon" ng-click="tagsForm.$valid && AddTags()" style="float:right;"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="item item-divider">
+                            Tag List
+                        </div>
+                        <div class="item item-button-right" ng-repeat="tag in TagDetails track by $index">
+                                <input class="ckbox" type="checkbox" ng-model="tag.checked" ng-checked="tag.checked" />            
+                            <label>
+                                {{tag.fldTagName}}
+                                {{tag.type}}
+                            </label>
+                        </div>
+                    </div>
+        </ion-content>
+    </form>
+</ion-view>

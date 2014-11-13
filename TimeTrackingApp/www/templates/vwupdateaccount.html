@@ -1,0 +1,56 @@
+﻿<div>
+    <form name="updateRegistrationForm" ng-controller="updateaccountcontroller">
+        <ion-view title="Create New User">
+            <div class="bar bar-header bar-stable">
+                <div class="button-bar">
+                    <button class="button button-positive" ng-click="updateRegistrationForm.$valid && UpdateAccount()">Done</button>
+                    <button class="button button-positive" ng-click="CancelRegister()">Cancel</button>
+                </div>
+            </div>
+            <ion-content class="has-header padding">
+                <div class="list">
+                    <div class="item item-divider">
+                        Account Registration
+                    </div>
+                    <br />
+                    *<span>Account Name</span>
+                    <label class="item item-input item-stacked-label">
+                        {{TTUser.fldUserEmail}}
+                    </label>
+                    <br />
+                    *<span>First Name</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="First Name" ng-model="TTUser.fldFirstName" required>
+                    </label>
+                    <br />
+                    *<span>Family Name</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Family Name" ng-model="TTUser.fldFamilyName" required>
+                    </label>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label"><i class="fa fa-calendar"></i>Date of Birth</label><br>
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="TTUser.fldDOB" data-date-format="dd/MM/yyyy" data-autoclose="1" placeholder="dd/MM/yyyy" bs-datepicker>
+                        </div>
+                    </div>
+                    *<span>Position</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Position" ng-model="TTUser.fldPosition" required>
+                    </label>
+                    <br />
+                    *<span>Mobile</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Mobile" ng-model="TTUser.fldMobile" required>
+                    </label>
+                    <br />
+                    <span>Photo (Best Resolution : 70X70px)</span>
+                    <input type="file" ng-model="TTUser.fldphoto" accept="image/*" single app-filereader style="color: transparent;" />
+                    <img ng-src="{{TTUser.fldphoto}}" width="70" height="70" />
+                    <br />
+                    <div class="footer" />
+                </div>
+            </ion-content>
+        </ion-view>
+    </form>
+</div>

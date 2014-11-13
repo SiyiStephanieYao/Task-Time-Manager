@@ -1,0 +1,76 @@
+﻿<div>
+    <form name="addprojectForm" ng-controller="addprojectcontroller">
+        <ion-view title="Add Project">
+            <div class="bar bar-header bar-stable">
+                <div class="button-bar">                    
+                    <button class="button button-positive" ng-click="addprojectForm.$valid && AddProject()">Done</button>
+                    <button class="button button-positive" ng-click="Cancel()">Cancel</button>
+                </div>
+            </div>
+            <ion-content class="has-header padding" >
+                <div class="list">
+                    <div class="item item-divider">
+                        Add Project
+                    </div>
+                    <br />
+                    <span>* Project Name</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Project Name" ng-model="Project.fldProjectName" required> 
+                    </label>
+                    <br />
+                    <label class="item item-input item-select" ng-model="Clients">
+                        <div class="input-label">
+                            * Client
+                        </div>
+                        <select ng-model="Project.fldClientId" required ng-disabled="Project.fldIsClosed">
+                            <option ng-repeat="client in Clients" value="{{client.fldClientId}}">{{client.fldClientName}}</option>
+                        </select>
+                    </label>
+                    <br />
+                    <span>Description</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Description" ng-model="Project.fldProjectDescription">
+                    </label>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label"><i class="fa fa-calendar"></i>* Start Date</label><br>
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="Project.fldStartDate" required data-date-format="dd/MM/yyyy" data-autoclose="1" placeholder="dd/MM/yyyy" bs-datepicker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"><i class="fa fa-calendar"></i>End date</label><br>
+                        <div class="form-group">
+                            <input type="text" ng-model="Project.fldEndDate" ng-disabled="true" />
+                        </div>
+                    </div>
+                    <span>* Location</span>
+                    <label class="item item-input item-stacked-label">
+                        <input id="from" type="text" ng-model="Project.fldLocation" placeholder="Type Address" class="ng-pristine ng-valid" autocomplete="on" required>
+                    </label>
+                    <br />
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            * Manager
+                        </div>
+                        <select ng-model="Project.fldManager" required>
+                            <option ng-repeat="manager in Managers" value="{{manager.fldUserEmail}}">{{manager.fldFirstName}}</option>
+                        </select>
+                    </label>
+
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                           
+                            <input class="ckbox" type="checkbox" title="Is closed" name="IsClosed" value="IsClosed" ng-click="WantToMakeClose()" ng-model="Project.fldIsClosed" ng-disabled="Project.fldIsClosed"> 
+                                Is Closed
+                           
+                            
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </ion-content>
+        </ion-view>
+    </form>
+</div>

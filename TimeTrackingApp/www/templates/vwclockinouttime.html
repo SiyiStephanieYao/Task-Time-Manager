@@ -1,0 +1,27 @@
+﻿<div>
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <form name="clockinoutForm" ng-controller="clockinouttimecontroller" class="form-inline ng-pristine ng-valid">
+        <ion-view title="Clock In Out">
+            <div class="bar bar-header bar-stable">
+                <div class="button-bar">
+                    <button class="button button-positive" ng-click="clockinoutForm.$valid && AddClockInOutEntry()">Done</button>
+                    <button class="button button-positive" ng-click="Cancel()">Cancel</button>                   
+                </div>
+            </div>
+            <ion-content class="has-header padding">
+                <br />
+                <div class="list" ng-model="clockinout">
+                    <div class="item item-divider">
+                        Select Date
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label"><i class="fa fa-calendar"></i> {{status}}</label><br>
+                    </div>
+                    Date : <input type="text" class="form-control" id="datetimebox"  ng-model="clockinout.ClockDateTime" required data-date-format="dd/MM/yyyy" data-autoclose="1" placeholder="dd/MM/yyyy" bs-datepicker readonly>
+                    Time : <input type="time" ng-model="clockinout.ClockTime" /> 
+                 </div>
+            </ion-content>
+        </ion-view>
+    </form>
+</div>

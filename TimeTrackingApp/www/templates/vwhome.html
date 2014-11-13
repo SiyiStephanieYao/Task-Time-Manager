@@ -1,0 +1,55 @@
+﻿<div>
+    <form name="homeform" ng-controller="homecontroller">
+        <ion-view title="Create New User">
+            <ion-header-bar align-title="left" class="bar-stable">
+                <div class="buttons">
+                    <button class="button button-positive" ng-click="LogOut()">Logout</button>
+                </div>
+                <h1 class="title"></h1>
+                <div class="buttons">
+                    <button class="button addicon" style="margin-left:5px;" ng-click="AddProject()" ng-show="ShowAddButton"></button>
+                    <button class="button payperiodicon" style="margin-left:5px;" ng-click="PeriodFilter()" ng-show="ShowFilterButton"></button>
+                    <button class="button exporticon" style="margin-left:5px;" ng-click="ExportDatabyProjects()" ng-show="ShowExportButton"></button>
+                    <button class="button deleteicon" style="margin-left:5px;" ng-click="DeleteProjects()" ng-show="ShowDeleteButton"></button>
+                </div>
+            </ion-header-bar>
+            <ion-content class="has-header padding">
+                <div class="card">
+                    <div class="item item-text-wrap" style="font-size:15px;">
+                        Welcome {{LoggedInUser.LastName}}, {{LoggedInUser.FirstName}}
+                        <br />Today is, <b>{{getDatetime | date:'dd-MMM-yyyy'}}</b>
+                        <div class="row">
+                            <div class="col col-66">
+                                <div style="margin-top:10px;">
+                                    <button class="button button-small" ng-click="ModifyAccountDetails()">Modify Account Details</button>
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <button class="button button-small" ng-click="ChangePassword()">Modify Password</button>
+                                </div>
+                            </div>
+                            <div class="col"><img ng-src="{{TTUser.fldphoto}}" width="90" height="90" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item item-divider">
+                    <span style="font-weight:lighter;">{{NoOfProjectSelected}}</span>
+                </div>
+                <div class="list">
+                    <div class="card">
+                        <div class="item item-divider">
+                            Projects
+                            <!--{{SelectedPeriodFilter}}-->
+                        </div>
+                        <div class="item item-text-wrap">
+                            <div class="item item-button-right" ng-repeat="project in Projects">                               
+                                <input class="ckbox" type="checkbox" ng-model="project.checked" ng-checked="project.checked" ng-change="CheckBoxSelectionChanged()" />                                  
+                                <span ng-click="ShowTasks(project.fldProjectId)">{{project.fldProjectName}}<span style="font-size:smaller; color:green;"> {{project.TaskClockedStatus}}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer" />
+            </ion-content>
+        </ion-view>
+    </form>
+</div>

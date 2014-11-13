@@ -1,0 +1,49 @@
+﻿<form name="addtagfilterForm" ng-controller="createtagfiltercontroller">
+    <ion-view title="Create Tag Filter" animation="slide-left-right">
+        <div>
+            <div class="bar bar-header bar-stable">
+                <div class="button-bar">
+                    <button class="button button-positive" ng-click="addtagfilterForm.$valid && CreateTagFilter()">Done</button>
+                    <button class="button button-positive" ng-click="Cancel()">Cancel</button>                   
+                </div>
+            </div>
+            <ion-content class="has-header padding">
+                <div class="list">
+                    <div class="item item-divider">
+                        Create Tag Filter
+                    </div>
+                    <br />
+                    *<span>Filter Name</span>
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" placeholder="Filter Name" ng-model="TagFilter.fldFilterName" required>
+                    </label>
+                    <br />
+                    <div class="list">
+                        <div class="item item-divider">
+                            <button class="button button-small button-positive" ng-click="AddIncludeTags()">Add Include Tags</button>
+                        </div>
+                        <div ng-repeat="tag in TagFilter.IncludeTags">
+                            <a class="item">
+                                {{tag.fldTagName}}
+                                <div style="display:none;">{{tag.type}}</div>
+                            </a>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="list">
+                        <div class="item item-divider">
+                            <button class="button button-small button-positive" ng-click="AddExcludeTags()">Add Exclude Tags</button>
+                        </div>
+                        <div ng-repeat="tag in TagFilter.ExcludeTags">
+                            <a class="item">
+                                {{tag.fldTagName}}
+                                <div style="display:none;">{{tag.type}}</div>
+                            </a>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </ion-content>
+        </div>
+    </ion-view>
+</form>

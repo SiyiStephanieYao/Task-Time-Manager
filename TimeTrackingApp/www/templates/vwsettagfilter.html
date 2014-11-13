@@ -1,0 +1,33 @@
+﻿<ion-view title="Set Tag Filters">
+    <form name="tagsForm" ng-controller="settagfiltercontroller">
+        <div class="bar bar-header bar-stable">
+            <div class="button-bar">
+                <button class="button button-small button-positive" ng-click="AssignTagsToFilter()">Done</button>
+                <button class="button button-small button-positive" ng-click="Cancel()">Cancel</button>
+            </div>
+        </div>
+        <ion-content class="has-header padding">
+            <div class="list">
+                <div ng-model="Project">
+                    <div class="card">
+                        <div class="item item-divider">
+                            Tag Filter
+                        </div>
+                        <div class="item item-button-right" ng-repeat="tfilter in TagFilter">
+                            <input class="ckbox" type="checkbox" ng-model="tfilter.checked" ng-checked="tfilter.checked" />
+                            <label>
+                                {{tfilter.fldFilterName}}
+                            </label>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="button" class="button button-small button-positive" ng-click="AddFilters()">Add Filters</button>
+                                    <button type="button" class="button button-small button-positive" ng-click="DeleteSelectedFilters()">Delete Selected Filters</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </ion-content>
+    </form>
+</ion-view>

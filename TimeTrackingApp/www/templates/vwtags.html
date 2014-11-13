@@ -1,0 +1,42 @@
+﻿<ion-view title="Tag Details" animation="slide-left-right">
+    <form name="tagsForm" ng-controller="tagsdetailscontroller">
+        <div class="bar bar-header bar-stable">
+            <div class="button-bar">
+                <button class="button button-small button-positive" ng-click="AssignTagsToTask()">Done</button>
+                <button class="button button-small button-positive" ng-click="Cancel()">Cancel</button>               
+            </div>
+        </div>
+        <ion-content class="has-header padding">
+            <div class="list" ng-model="Tags">
+                <div ng-model="Project">
+                    <div class="card">
+                        <div class="item item-divider">
+                            Add Tag
+                        </div>
+                        <div class="item item-text-wrap">
+                            <div class="row">
+                                <div class="col-80">
+                                    <label class="item item-input item-stacked-label">
+                                        <input type="text" name="name" placeholder="Add Tag" ng-model="Tags.fldTagName" required />
+                                    </label>
+                                </div>
+                                <div class="col-20">
+                                    <!--<i class="addprojecticon" style="float:right;" ng-click="AddTags()"></i>-->
+                                    <button class="button addicon" ng-click="tagsForm.$valid && AddTags()" style="float:right;"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="item item-divider">
+                            Tag List <!--<i class="deleteprojecticon" style="float:right;" ng-click="DeleteTags()"></i>-->
+                        </div>
+                        <div class="item item-button-right" ng-repeat="tag in TagDetails">                           
+                                <input class="ckbox"  type="checkbox" ng-model="tag.checked" ng-checked="tag.checked" />                     
+                            <label>
+                                {{tag.fldTagName}}
+                            </label>
+                        </div>
+                    </div>
+        </ion-content>
+    </form>
+</ion-view>

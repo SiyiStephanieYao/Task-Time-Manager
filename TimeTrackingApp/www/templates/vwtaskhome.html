@@ -1,0 +1,43 @@
+﻿<ion-view title="Task Details" animation="slide-left-right">
+    <form name="taskhomeForm" ng-controller="taskhomecontroller">
+        <ion-header-bar align-title="left" class="bar-stable">
+            <div class="buttons">
+            </div>
+            <h1 class="title"></h1>
+            <div class="buttons">
+                <button class="button addicon" ng-click="AddTasks()" style="margin-left:5px;" ng-show="ShowAddButton"></button>
+                <button class="button payperiodicon" style="margin-left:5px;" ng-click="PeriodFilter()" ng-show="ShowFilterButton"></button>
+                <button class="button exporticon" style="margin-left: 5px;" ng-click="ExportDatabyTasks()" ng-show="ShowExportButton"></button>
+                <button class="button deleteicon" ng-click="DeleteTasks()" style="margin-left: 5px;" ng-show="ShowDeleteButton"></button>
+            </div>
+        </ion-header-bar>
+        <ion-content class="has-header padding">
+            <div class="item item-divider">
+                Task List
+            </div>
+            <div style="clear:both;"></div>
+            <br />
+            <div class="item item-divider">
+                <span style="font-weight:lighter;">{{NoOfTaskSelected}}</span>
+            </div>
+            <div class="list">
+                <div class="card">
+                    <div class="item item-text-wrap" ng-model="Tasks">
+                        <div class="item item-button-right" ng-repeat="task in Tasks">                           
+                            <input class="ckbox" type="checkbox" ng-model="task.checked" ng-checked="task.checked" ng-change="TaskCheckBoxSelectionChanged()" />                           
+                            <span ng-click="ShowTaskEntries(task.fldTaskId)">{{task.fldTaskName}} <span style="font-size:smaller; color:green;"> {{task.TaskClockedStatus}}</span></span>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="button button-small button-positive" ng-click="SetFilters()">Set Filters</button>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </form>
+</ion-view>
+
+

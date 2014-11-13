@@ -1,0 +1,12 @@
+﻿<form name="locationForm">
+    <ion-view title="location">
+        <ion-content>
+            <div ng-controller="locationcontroller">
+                <input id="from" type="text" ng-model="user.from" placeholder="Type Address" class="ng-pristine ng-valid" autocomplete="off">
+                <input type="hidden" ng-model="user.fromLat">
+                <input type="hidden" ng-model="user.fromLng">
+                <p>{{user.from}} <br> {{'Latitude : ' + user.fromLat + ', Longitutde : ' + user.fromLng}}</p>
+            </div>
+        </ion-content>
+    </ion-view>
+</form>
